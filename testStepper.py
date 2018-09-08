@@ -36,9 +36,9 @@ theta1=math.degrees(math.atan(y/x))
 print(str(theta1)+" "+str(theta2)+ " "+str(theta3))
 
 ## Creation of objects for various motors
-testStepper1 = stepper(s1)
-testStepper2 = stepper(s2)
-testStepper3 = stepper(s3)
+##testStepper1 = stepper(s1)
+##testStepper2 = stepper(s2)
+##testStepper3 = stepper(s3)
 
 ppr=1600  # Pulse Per Revolution
 
