@@ -24,14 +24,23 @@ l1=42
 l2=36
 ######## Coordinates in xy frame in cm
 
-x=10
-y=62
+x = 10
+y = 62
+z = 0
 
 #######Inverse Kinematics Equation for obtaining th joint angles -
 
-theta3=math.degrees(math.acos((x*x+y*y-(l1*l1)-(l2*l2))/(2*l1*l2)))
-theta2=math.degrees(math.atan((y*(l1+l2*math.cos(theta3))-(x*l2*math.sin(theta3)))/(x*(l1+l2*math.cos(theta3))+(y*l2*math.sin(theta3)))))
-theta1=math.degrees(math.atan(y/x))
+##theta3=math.degrees(math.acos((x*x+y*y-(l1*l1)-(l2*l2))/(2*l1*l2)))
+##theta2=math.degrees(math.atan((y*(l1+l2*math.cos(theta3))-(x*l2*math.sin(theta3)))/(x*(l1+l2*math.cos(theta3))+(y*l2*math.sin(theta3)))))
+##theta1=math.degrees(math.atan(z/x))
+
+theta3 = 0
+theta2 = 0
+theta1 = 0
+
+theta2=math.degrees(math.acos((x*x+y*y-(l1*l1)-(l2*l2))/(2*l1*l2)))
+theta3=math.degrees(math.atan((y*(l1+l2*math.cos(theta2))-(x*l2*math.sin(theta2)))/(x*(l1+l2*math.cos(theta2))+(y*l2*math.sin(theta2)))))
+theta1=math.degrees(math.atan(z/x))
 
 print(str(theta1)+" "+str(theta2)+ " "+str(theta3))
 
@@ -69,9 +78,24 @@ step3=(ppr/360)*a3*g3
 # Calculation of timedelay for differnt motors
 execTime=10
 
-td1=abs((execTime-(step1*0.002))/step1)
-td2=abs((execTime-(step2*0.002))/step2)
-td3=abs((execTime-(step3*0.002))/step3)
+##td1=abs((execTime-(step1*0.002))/step1)
+##td2=abs((execTime-(step2*0.002))/step2)
+##td3=abs((execTime-(step3*0.002))/step3)
+
+if (step1 == 0):
+    td1 = 0
+else :
+    td1=abs((execTime-(step1*0.002))/step1)
+
+if (step2 == 0):
+    td2 = 0
+else:
+    td2=abs((execTime-(step2*0.002))/step2)
+
+if (step3 == 0) :
+    td3 = 0
+else:
+    td3=abs((execTime-(step3*0.002))/step3)
 
 #print(td1)
 #print(td2)
