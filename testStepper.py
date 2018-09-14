@@ -5,12 +5,12 @@ import time
 
 from Stepper import stepper
 
-def print_time(threadName, delay,s,steps, dir,speed):
+def print_time(threadName, delay, s, steps, dir, speed):
    count = 1
    while count >=1:
       time.sleep(delay)
       count -= 1
-      #print ("%s: %s" % ( threadName, time.ctime(time.time()) ))
+      print ("%s: %s" % ( threadName, time.ctime(time.time())))
       testStepper = stepper(s)
       testStepper.step(steps, dir,speed);
       
@@ -24,8 +24,8 @@ l1=42
 l2=36
 ######## Coordinates in xy frame in cm
 
-ox = 17.8
-oy = 18.4
+ox = 60
+oy = 4.6
 oz = 0
 
 #######Inverse Kinematics Equation for obtaining th joint angles -
@@ -84,7 +84,7 @@ print(str(a1)+" a2:"+str(a2)+ " a3:"+str(a3))
 ##a3=0  #link 2
 
 ## Gear Ratios
-g1=12.2
+g1=12.22222222222
 g2=10
 g3=10
  
@@ -108,21 +108,24 @@ execTime=10
 if (step1 == 0):
     td1 = 0
 else :
-    td1=abs((execTime-(step1*0.002))/step1)
+##    td1=abs((execTime-(step1*0.002))/step1)
+    td1 = execTime/step1
 
 if (step2 == 0):
     td2 = 0
 else:
-    td2=abs((execTime-(step2*0.002))/step2)
+##    td2=abs((execTime-(step2*0.002))/step2)
+    td2 = execTime/step2
 
 if (step3 == 0) :
     td3 = 0
 else:
-    td3=abs((execTime-(step3*0.002))/step3)
+##    td3=abs((execTime-(step3*0.002))/step3)
+    td3 = execTime/step3
 
-#print(td1)
-#print(td2)
-#print(td3)
+##print(td1)
+##print(td2)
+##print(td3)
 
 
 #testStepper1.step(step1, "l",td1); #steps, dir, speed, stayOn  BASE--[left==ccw; right= cw]

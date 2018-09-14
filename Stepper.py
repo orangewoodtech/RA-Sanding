@@ -1,4 +1,4 @@
-
+import time
 from time import sleep
 import RPi.GPIO as gpio #https://pypi.python.org/pypi/RPi.GPIO
 #import exitHandler #uncomment this and line 58 if using exitHandler
@@ -54,26 +54,29 @@ class stepper:
                 execTime=60
                 
                 waitTime = speed/0.0001 #waitTime controls speed
-                
-                
-                
+                                                
                 while stepCounter < steps:
 			#gracefully exit if ctr-c is pressed
 			#exitHandler.exitPoint(True) #exitHandler.exitPoint(True, cleanGPIO)
 
 			#turning the gpio on and off tells the easy driver to take one step
                         gpio.output(self.stepPin, True)
-                        sleep(0.001)
+##                        sleep(0.001)
+                        sleep(abs(speed))
                         gpio.output(self.stepPin, False)
                         stepCounter += 1
-                        sleep(0.001)
+##                        sleep(0.001)
  
 			#wait before taking the next step thus controlling rotation speed
-                        sleep(speed)
+##                        sleep(speed)
 		
-                        if (stayOn == False):
+##                        if (stayOn == False):
+##                        #set enable to high (i.e. power is NOT going to the motor)
+##                             gpio.output(self.enablePin, True)
+                if (stayOn == False):
                         #set enable to high (i.e. power is NOT going to the motor)
                              gpio.output(self.enablePin, True)
+                             print ("%s" % (time.ctime(time.time())))
 
 
                 #print("stepperDriver complete (turned " + dir + " " + str(steps) + " degrees at "+ str(speed)+" speed)" )
