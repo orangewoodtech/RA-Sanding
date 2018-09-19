@@ -23,9 +23,16 @@ s3=[10,9,11]   #19,21,23
 l1=42
 l2=36
 ######## Coordinates in xy frame in cm
+hx = 17.8
+hy = 18.4
+hz = 0
 
-ox = 17.8  
-oy = 18.4
+htheta2=-math.degrees(math.acos((hx*hx+hy*hy-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
+htheta1=math.degrees(math.atan(hy/hx) - math.atan((l2*math.sin(htheta2*math.pi/180))/(l1 + l2*math.cos(htheta2*math.pi/180))))
+htheta3=math.degrees(math.acos(hz/(l1*math.cos(htheta1*math.pi/180) + l2*math.cos((htheta2 + htheta1)*math.pi/180))))
+
+ox = 60
+oy = -6
 oz = 0
 
 #######Inverse Kinematics Equation for obtaining th joint angles -
@@ -64,7 +71,7 @@ print(str(oldtheta1)+" oldtheta2:"+str(oldtheta2)+ " oldtheta3:"+str(oldtheta3))
 ppr=1600  # Pulse Per Revolution
 
 x = 40
-y = -6
+y = 1
 z = 0
 
 theta2=-math.degrees(math.acos((x*x+y*y-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
@@ -72,9 +79,17 @@ theta1=math.degrees(math.atan(y/x) - math.atan((l2*math.sin(theta2*math.pi/180))
 theta3=math.degrees(math.acos(z/(l1*math.cos(theta1*math.pi/180) + l2*math.cos((theta2 + theta1)*math.pi/180))))
 
 # angles to be moved
-a1=theta3 - oldtheta3 #base
-a2=theta1 - oldtheta1 #link 1
-a3=theta2 - oldtheta2 #link 2
+oa1=oldtheta3 - htheta3 #base
+oa2=oldtheta1 - htheta1 #link 1
+oa3=oldtheta2 - htheta2 #link 2
+
+na1=theta3 - htheta3 #base
+na2=theta1 - htheta1 #link 1
+na3=theta2 - htheta2 #link 2
+
+a1 = na1 - oa1
+a2 = na2 - oa2
+a3 = na3 - oa3
 
 print(str(theta1)+" theta2:"+str(theta2)+ " theta3:"+str(theta3))
 print(str(a1)+" a2:"+str(a2)+ " a3:"+str(a3))
