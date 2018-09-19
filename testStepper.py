@@ -24,8 +24,8 @@ l1=42
 l2=36
 ######## Coordinates in xy frame in cm
 
-ox = 60
-oy = 4.6
+ox = 17.8  
+oy = 18.4
 oz = 0
 
 #######Inverse Kinematics Equation for obtaining th joint angles -
@@ -63,8 +63,8 @@ print(str(oldtheta1)+" oldtheta2:"+str(oldtheta2)+ " oldtheta3:"+str(oldtheta3))
 
 ppr=1600  # Pulse Per Revolution
 
-x = 17.8
-y = 18.4
+x = 40
+y = -6
 z = 0
 
 theta2=-math.degrees(math.acos((x*x+y*y-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
@@ -123,9 +123,9 @@ else:
 ##    td3=abs((execTime-(step3*0.002))/step3)
     td3 = execTime/step3
 
-##print(td1)
-##print(td2)
-##print(td3)
+print(td1)
+print(td2)
+print(td3)
 
 
 #testStepper1.step(step1, "l",td1); #steps, dir, speed, stayOn  BASE--[left==ccw; right= cw]

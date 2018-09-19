@@ -51,9 +51,9 @@ class stepper:
 
                 stepCounter = 0
                 #print("start")
-                execTime=60
+##                execTime=60
                 
-                waitTime = speed/0.0001 #waitTime controls speed
+##                waitTime = speed/0.0001 #waitTime controls speed
                                                 
                 while stepCounter < steps:
 			#gracefully exit if ctr-c is pressed
