@@ -12,8 +12,7 @@ def print_time(threadName, delay, s, steps, dir, speed):
    while count >=1:
       time.sleep(delay)
       count -= 1
-      print("%s: %s" % ( threadName, time.ctime(time.time())))
-      print()
+      print ("%s: %s" % ( threadName, time.ctime(time.time())))
       testStepper = stepper(s)
       testStepper.step(steps, dir,speed);
       
@@ -28,14 +27,12 @@ l2=36
 #######Inverse Kinematics Equation for obtaining th joint angles -
 
 ######## Coordinates in xy frame in cm
-ox = [40,45,50,55,60]
-y = [-6,-5.8,-5.6,-5.4,-5.2]
-
-for i in range(5):
+ox = [65,60,55,50,45]
+for ix in range(5):
     ##ox[5] = {40 45 50 55 60}
-    print(ox[i])
-    x=ox[i]
-    oy = y[i]
+    print(ox[ix])
+    x=ox[ix]
+    oy = -6
     oz = 0
 
     oldtheta2=-math.degrees(math.acos((x*x+oy*oy-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
@@ -44,8 +41,8 @@ for i in range(5):
     print(" oldtheta1:" + str(oldtheta1)+" oldtheta2:"+ str(oldtheta2)+ " oldtheta3:"+ str(oldtheta3))
     ppr=1600  # Pulse Per Revolution
 
-    nx = x+5 ##{45,50,55,60,65}
-    ny = oy+2
+    nx = x-5 ##{45,50,55,60,65}
+    ny = -6
     nz = 0
 
     theta2=-math.degrees(math.acos((nx*nx+ny*ny-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
@@ -98,5 +95,5 @@ for i in range(5):
         dir3="r"    
     _thread.start_new_thread( print_time, ("stepper-1", 0.2, s1,abs(step1),dir1,td1))
     _thread.start_new_thread( print_time, ("stepper-2", 0.2, s2,abs(step2),dir2,td2))
-    _thread.start_new_thread( print_time, ("stepper-3", 0.1, s3,abs(step3),dir3,td3))
+    _thread.start_new_thread( print_time, ("stepper-3", 0.2, s3,abs(step3),dir3,td3))
     time.sleep(0.2)

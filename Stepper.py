@@ -61,12 +61,11 @@ class stepper:
 
 			#turning the gpio on and off tells the easy driver to take one step
                         gpio.output(self.stepPin, True)
-##                        sleep(0.001)
                         sleep(abs(speed))
                         gpio.output(self.stepPin, False)
+                        #sleep(abs(speed))
                         stepCounter += 1
-##                        sleep(0.001)
- 
+                        
 			#wait before taking the next step thus controlling rotation speed
 ##                        sleep(speed)
 		

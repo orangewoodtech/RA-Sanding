@@ -31,8 +31,8 @@ htheta2=-math.degrees(math.acos((hx*hx+hy*hy-(l1*l1)-(l2*l2))/ (2*l1*l2)))
 htheta1=math.degrees(math.atan(hy/hx) - math.atan((l2*math.sin(htheta2*math.pi/180))/(l1 + l2*math.cos(htheta2*math.pi/180))))
 htheta3=math.degrees(math.acos(hz/(l1*math.cos(htheta1*math.pi/180) + l2*math.cos((htheta2 + htheta1)*math.pi/180))))
 
-ox = 52
-oy = 0.1
+ox = 40
+oy = -6
 oz = 0
 
 #######Inverse Kinematics Equation for obtaining th joint angles -
@@ -136,7 +136,7 @@ if (step3 == 0) :
     td3 = 0
 else:
 ##    td3=abs((execTime-(step3*0.002))/step3)
-    td3 = (execTime/step3)
+    td3 = (execTime+1/step3)
 
 print(td1)
 print(td2)
