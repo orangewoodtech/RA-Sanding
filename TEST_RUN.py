@@ -45,7 +45,7 @@ print(" oldtheta1:"+str(oldtheta1)+" oldtheta2:"+str(oldtheta2)+ " oldtheta3:"+s
 ppr=1600  # Pulse Per Revolution
 
 x = 40
-y = -6
+y = 0.1
 z = 0
 
 theta2=-math.degrees(math.acos((x*x+y*y-(l1*l1)-(l2*l2))/ (2*l1*l2)))  

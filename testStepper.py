@@ -31,7 +31,7 @@ htheta2=-math.degrees(math.acos((hx*hx+hy*hy-(l1*l1)-(l2*l2))/ (2*l1*l2)))
 htheta1=math.degrees(math.atan(hy/hx) - math.atan((l2*math.sin(htheta2*math.pi/180))/(l1 + l2*math.cos(htheta2*math.pi/180))))
 htheta3=math.degrees(math.acos(hz/(l1*math.cos(htheta1*math.pi/180) + l2*math.cos((htheta2 + htheta1)*math.pi/180))))
 
-ox = 52
+ox = 60
 oy = 0.1
 oz = 0
 
@@ -70,9 +70,11 @@ print(str(oldtheta1)+" oldtheta2:"+str(oldtheta2)+ " oldtheta3:"+str(oldtheta3))
 
 ppr=1600  # Pulse Per Revolution
 
-x = 17.8
-y = 18.4
+x = 30
+y = 0.1
 z = 0
+
+y = (0.04 * (x - ox)) - y
 
 theta2=-math.degrees(math.acos((x*x+y*y-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
 theta1=math.degrees(math.atan(y/x) - math.atan((l2*math.sin(theta2*math.pi/180))/(l1 + l2*math.cos(theta2*math.pi/180))))
