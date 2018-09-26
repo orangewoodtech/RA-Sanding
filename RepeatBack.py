@@ -34,21 +34,25 @@ htheta3=math.degrees(math.acos(hz/(l1*math.cos(htheta1*math.pi/180) + l2*math.co
 ox = 60
 oy = 0.1
 oz = 0
+
 #######Inverse Kinematics Equation for obtaining th joint angles -
+
 oldtheta2=-math.degrees(math.acos((ox*ox+oy*oy-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
 oldtheta1=math.degrees(math.atan(oy/ox) - math.atan((l2*math.sin(oldtheta2*math.pi/180))/(l1 + l2*math.cos(oldtheta2*math.pi/180))))
 oldtheta3=math.degrees(math.acos(oz/(l1*math.cos(oldtheta1*math.pi/180) + l2*math.cos((oldtheta2 + oldtheta1)*math.pi/180))))
+
 print(str(oldtheta1)+" oldtheta2:"+str(oldtheta2)+ " oldtheta3:"+str(oldtheta3))
+
 ppr=1600  # Pulse Per Revolution
 
-x = 40
-y = 0.1
+x = 17.8
+y = 18.4
 z = 0
-                        ##Error compensation for Linear Motion.
-##y = (0.4 * (x - ox)) - y
-##y = (0.04 * (ox - x)) - y
 
-y = (0.04 * (x - ox)) - y
+##Error compensation for Linear Motion.
+##y = (0.04 * (x - ox)) - y
+##y = (0.04 * (ox - x)) - y
+#y = (0.00062 * (x - ox)) - y
 
 theta2=-math.degrees(math.acos((x*x+y*y-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
 theta1=math.degrees(math.atan(y/x) - math.atan((l2*math.sin(theta2*math.pi/180))/(l1 + l2*math.cos(theta2*math.pi/180))))
@@ -142,3 +146,4 @@ else:
 _thread.start_new_thread( print_time, ("stepper-1", 0.2, s1,abs(step1),dir1,td1))
 _thread.start_new_thread( print_time, ("stepper-2", 0.2, s2,abs(step2),dir2,td2))
 _thread.start_new_thread( print_time, ("stepper-3", 0.2, s3,abs(step3),dir3,td3)) 
+

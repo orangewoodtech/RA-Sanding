@@ -30,35 +30,33 @@ hx = 17.8
 hy = 18.4
 hz = 0
 
-htheta2=-math.degrees(math.acos(((hx**2)+(hy**2)-(l1**2)-(l2**2))/ (2*l1*l2)))
-htheta1=math.degrees((math.atan2(hy,hx)*math.pi/180) - math.atan((l2*math.sin(htheta2*math.pi/180))/(l1 + l2*math.cos(htheta2*math.pi/180))))
+htheta2=-math.degrees(math.acos((hx*hx+hy*hy-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
+htheta1=math.degrees(math.atan(hy/hx) - math.atan((l2*math.sin(htheta2*math.pi/180))/(l1 + l2*math.cos(htheta2*math.pi/180))))
 htheta3=math.degrees(math.acos(hz/(l1*math.cos(htheta1*math.pi/180) + l2*math.cos((htheta2 + htheta1)*math.pi/180))))
-
-
 
 ######## Coordinates in xy frame in cm
 ox = [40,42,44,46,48,50,52,54,56,58,60]
 for x in ox:
     ##ox[5] = {40 45 50 55 60}
     
-    oy = 1
+    oy = 0.1
     oz = 0
-
-    oldtheta2=-math.degrees(math.acos(((x**2)+(oy**2)-(l1**2)-(l2**2))/ (2*l1*l2)))
-    oldtheta1= math.degrees(((math.atan2(oy,ox))) - math.atan((l2*math.sin(oldtheta2*math.pi/180))/(l1 + l2*math.cos(oldtheta2*math.pi/180))))
+    
+    oldtheta2=-math.degrees(math.acos((x*x+oy*oy-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
+    oldtheta1=math.degrees(math.atan(oy/x) - math.atan((l2*math.sin(oldtheta2*math.pi/180))/(l1 + l2*math.cos(oldtheta2*math.pi/180))))
     oldtheta3=math.degrees(math.acos(oz/(l1*math.cos(oldtheta1*math.pi/180) + l2*math.cos((oldtheta2 + oldtheta1)*math.pi/180))))
+
     print(" oldtheta1:" + str(oldtheta1)+" oldtheta2:"+ str(oldtheta2)+ " oldtheta3:"+ str(oldtheta3))
     ppr=1600  # Pulse Per Revolution
 
     nx = x+2 ##{45,50,55,60,65}
-    ny = 1
+    ny = 0.1
     nz = 0
 
-    theta2=-math.degrees(math.acos(((nx**2)+(ny**2)-(l1**2)-(l2**2))/ (2*l1*l2)))  
-    theta1=math.degrees((math.atan2(ny,nx)*math.pi/180) - math.atan((l2*math.sin(theta2*math.pi/180))/(l1 + l2*math.cos(theta2*math.pi/180))))
+    theta2=-math.degrees(math.acos((nx*nx+ny*ny-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
+    theta1=math.degrees(math.atan(ny/nx) - math.atan((l2*math.sin(theta2*math.pi/180))/(l1 + l2*math.cos(theta2*math.pi/180))))
     theta3=math.degrees(math.acos(nz/(l1*math.cos(theta1*math.pi/180) + l2*math.cos((theta2 + theta1)*math.pi/180))))
-
-    
+        
     oa1=oldtheta3 - htheta3 #base
     oa2=oldtheta1 - htheta1 #link 1
     oa3=oldtheta2 - htheta2 #link 2
