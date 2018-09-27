@@ -21,7 +21,7 @@ s3=[10,9,11]   #19,21,23
 
 ######### Link Lenghts in cm.
 l1=42
-l2=36
+l2=35.6
 ######## Coordinates in xy frame in cm
 hx = 17.8
 hy = 18.4
@@ -31,8 +31,8 @@ htheta2=-math.degrees(math.acos((hx*hx+hy*hy-(l1*l1)-(l2*l2))/ (2*l1*l2)))
 htheta1=math.degrees(math.atan(hy/hx) - math.atan((l2*math.sin(htheta2*math.pi/180))/(l1 + l2*math.cos(htheta2*math.pi/180))))
 htheta3=math.degrees(math.acos(hz/(l1*math.cos(htheta1*math.pi/180) + l2*math.cos((htheta2 + htheta1)*math.pi/180))))
 
-ox = 60
-oy = 0.1
+ox = 17.8
+oy = 18.4
 oz = 0
 #######Inverse Kinematics Equation for obtaining th joint angles -
 oldtheta2=-math.degrees(math.acos((ox*ox+oy*oy-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
@@ -44,11 +44,18 @@ ppr=1600  # Pulse Per Revolution
 x = 40
 y = 0.1
 z = 0
+
                         ##Error compensation for Linear Motion.
-##y = (0.4 * (x - ox)) - y
+##y = (0.04 * (x - ox)) - y
 ##y = (0.04 * (ox - x)) - y
 
-y = (0.04 * (x - ox)) - y
+##y = (0.04 * (x - ox)) - y
+##if ox == hx and oy == hy:
+##    print(" Equal ")
+##else:
+##    y = (0.04 * (x - ox)) - y
+
+##y = (0.04 * (x - ox)) - y        
 
 theta2=-math.degrees(math.acos((x*x+y*y-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
 theta1=math.degrees(math.atan(y/x) - math.atan((l2*math.sin(theta2*math.pi/180))/(l1 + l2*math.cos(theta2*math.pi/180))))
@@ -112,7 +119,7 @@ if (step3 == 0) :
     td3 = 0
 else:
 ##    td3=abs((execTime-(step3*0.002))/step3)
-    td3 = (execTime/step3)
+    td3 = execTime/step3
 
 print(td1)
 print(td2)

@@ -22,7 +22,7 @@ s3=[10,9,11]   #19,21,23
 ######### Link Lenghts in cm.
 l1=42
 l2=36
-########## Coordinates in xy frame in cm
+######## Coordinates in xy frame in cm
 ##hx = 17.8
 ##hy = 18.4
 ##hz = 0
@@ -30,23 +30,28 @@ l2=36
 ##htheta2=-math.degrees(math.acos((hx*hx+hy*hy-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
 ##htheta1=math.degrees(math.atan(hy/hx) - math.atan((l2*math.sin(htheta2*math.pi/180))/(l1 + l2*math.cos(htheta2*math.pi/180))))
 ##htheta3=math.degrees(math.acos(hz/(l1*math.cos(htheta1*math.pi/180) + l2*math.cos((htheta2 + htheta1)*math.pi/180))))
-
-ox = 17.8
-oy = 18.4
+##
+ox = 60
+oy = 0.1
 oz = 0
-
 #######Inverse Kinematics Equation for obtaining th joint angles -
 
 oldtheta2=-math.degrees(math.acos((ox*ox+oy*oy-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
 oldtheta1=math.degrees(math.atan(oy/ox) - math.atan((l2*math.sin(oldtheta2*math.pi/180))/(l1 + l2*math.cos(oldtheta2*math.pi/180))))
-oldtheta3=math.degrees(1+math.acos(oz/(l1*math.cos(oldtheta1*math.pi/180) + l2*math.cos((oldtheta2 + oldtheta1)*math.pi/180))))
+oldtheta3=math.degrees(math.acos(oz/(l1*math.cos(oldtheta1*math.pi/180) + l2*math.cos((oldtheta2 + oldtheta1)*math.pi/180))))
 
-print(" oldtheta1:"+str(oldtheta1)+" oldtheta2:"+str(oldtheta2)+ " oldtheta3:"+str(oldtheta3))
+print(str(oldtheta1)+" oldtheta2:"+str(oldtheta2)+ " oldtheta3:"+str(oldtheta3))
+
 ppr=1600  # Pulse Per Revolution
 
 x = 40
 y = 0.1
 z = 0
+                        ##Error compensation for Linear Motion.
+##y = (0.04 * (x - ox)) - y
+##y = (0.04 * (ox - x)) - y
+
+##y = (0.038 * (x - ox)) - y
 
 theta2=-math.degrees(math.acos((x*x+y*y-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
 theta1=math.degrees(math.atan(y/x) - math.atan((l2*math.sin(theta2*math.pi/180))/(l1 + l2*math.cos(theta2*math.pi/180))))
@@ -61,39 +66,38 @@ theta3=math.degrees(math.acos(z/(l1*math.cos(theta1*math.pi/180) + l2*math.cos((
 ##na2=theta1 - htheta1 #link 1
 ##na3=theta2 - htheta2 #link 2
 
-##a1 = na1 - oa1
-##a2 = na2 - oa2
-##a3 = na3 - oa3
+a1 = theta3 - oldtheta3 #na1 - oa1
+a2 = theta1 - oldtheta1 #na2 - oa2
+a3 = theta2 - oldtheta2 #na3 - oa3
 
-a1=theta3 - oldtheta3
-a2=theta1 - oldtheta1
-a3=theta2 - oldtheta2
+print(str(theta1)+" theta2:"+str(theta2)+ " theta3:"+str(theta3))
+print(str(a1)+" a2:"+str(a2)+ " a3:"+str(a3))
 
-
-##print(str(theta1)+" theta2:"+str(theta2)+ " theta3:"+str(theta3))
-##print(str(a1)+" a2:"+str(a2)+ " a3:"+str(a3))
-
-a1=0  #base
-a2=-8.2  #link 1
-a3=20.2  #link 2
+##a1=0  #base
+##a2=-39  #link 1
+##a3=0  #link 2
 
 ## Gear Ratios
-g1=12.22
+g1=12.22222222222
 g2=10
 g3=10
  
 # Calculation for step and Speed
-step1=((ppr/360)*a1*g1)  
+step1=(ppr/360)*a1*g1  
 #speed1=0.01
 
-step2=((ppr/360)*a2*g2)
+step2=(ppr/360)*a2*g2
 #speed2=0.01
 
-step3=((ppr/360)*a3*g3) 
+step3=(ppr/360)*a3*g3  
 #speed3=0.01
 
 # Calculation of timedelay for differnt motors
 execTime=10
+
+##td1=abs((execTime-(step1*0.002))/step1)
+##td2=abs((execTime-(step2*0.002))/step2)
+##td3=abs((execTime-(step3*0.002))/step3)
 
 if (step1 == 0):
     td1 = 0
@@ -111,7 +115,7 @@ if (step3 == 0) :
     td3 = 0
 else:
 ##    td3=abs((execTime-(step3*0.002))/step3)
-    td3 = execTime/step3
+    td3 = (execTime/step3)
 
 print(td1)
 print(td2)
@@ -121,6 +125,8 @@ print(td3)
 #testStepper1.step(step1, "l",td1); #steps, dir, speed, stayOn  BASE--[left==ccw; right= cw]
 #testStepper2.step(step1, "l",td2); #steps, dir, speed, stayOn Link 1--[Left==forward; Right= backward]
 #testStepper3.step(angle3, "right",speed3); #steps, dir, speed, stayOn  Link 2--[left==downward; right= upward]
+
+
 if step1<0:
     dir1="r"
 else:
@@ -136,12 +142,6 @@ if step3<0:
 else:
     dir3="r"
 
-##_thread.start_new_thread( print_time, ("stepper-1", 0.2, s1,abs(step1),dir1,td1))
-##_thread.start_new_thread( print_time, ("stepper-2", 0.2, s2,abs(step2),dir2,td2))
-##_thread.start_new_thread( print_time, ("stepper-3", 0.2, s3,abs(step3),dir3,td3)) 
-
-
-print_time("stepper-2", 0.1, s2,abs(step2),dir2,td2)
-print_time("stepper-3", 0.1, s3,abs(step3),dir3,td3)
-print_time("stepper-1", 0.1, s1,abs(step1),dir1,td1)
-
+_thread.start_new_thread( print_time, ("stepper-1", 0.2, s1,abs(step1),dir1,td1))
+_thread.start_new_thread( print_time, ("stepper-2", 0.2, s2,abs(step2),dir2,td2))
+_thread.start_new_thread( print_time, ("stepper-3", 0.2, s3,abs(step3),dir3,td3)) 

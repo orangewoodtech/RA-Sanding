@@ -35,7 +35,7 @@ htheta1=math.degrees(math.atan(hy/hx) - math.atan((l2*math.sin(htheta2*math.pi/1
 htheta3=math.degrees(math.acos(hz/(l1*math.cos(htheta1*math.pi/180) + l2*math.cos((htheta2 + htheta1)*math.pi/180))))
 
 ######## Coordinates in xy frame in cm
-ox = [40,42,44,46,48,50,52,54,56,58,60]
+ox = [40,45,50,55]
 for x in ox:
     ##ox[5] = {40 45 50 55 60}
     
@@ -49,10 +49,11 @@ for x in ox:
     print(" oldtheta1:" + str(oldtheta1)+" oldtheta2:"+ str(oldtheta2)+ " oldtheta3:"+ str(oldtheta3))
     ppr=1600  # Pulse Per Revolution
 
-    nx = x+2 ##{45,50,55,60,65}
+    nx = x+5 ##{45,50,55,60,65}
     ny = 0.1
     nz = 0
-
+    #ny = (0.04 * (nx - x)) - ny
+    
     theta2=-math.degrees(math.acos((nx*nx+ny*ny-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
     theta1=math.degrees(math.atan(ny/nx) - math.atan((l2*math.sin(theta2*math.pi/180))/(l1 + l2*math.cos(theta2*math.pi/180))))
     theta3=math.degrees(math.acos(nz/(l1*math.cos(theta1*math.pi/180) + l2*math.cos((theta2 + theta1)*math.pi/180))))
@@ -69,12 +70,6 @@ for x in ox:
     a2 = na2 - oa2
     a3 = na3 - oa3
     
-    # angles to be moved
-##    a1=theta3 - oldtheta3 #base
-##    a2=theta1 - oldtheta1 #link 1
-##    a3=theta2 - oldtheta2 #link 2
-##    print(str(theta1)+" theta2:"+str(theta2)+ " theta3:"+str(theta3))
-##    print(str(a1)+" a2:"+str(a2)+ " a3:"+str(a3))
     ## Gear Ratios
     g1=12.22222222222
     g2=10
@@ -84,11 +79,11 @@ for x in ox:
     step2=(ppr/360)*a2*g2
     step3=(ppr/360)*a3*g3
     # Calculation of timedelay for differnt motors
-    execTime=5
+    execTime=10
     if (step1 == 0):
         td1 = 0
     else :
-        td1 = execTime/(step1+5)
+        td1 = execTime/step1
     if (step2 == 0):
         td2 = 0
     else:

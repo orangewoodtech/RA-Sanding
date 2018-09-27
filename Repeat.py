@@ -50,7 +50,7 @@ y = 0.1
 z = 0
 
 ##Error compensation for Linear Motion.
-##y = (0.04 * (x - ox)) - y
+y = (0.04 * (x - ox)) - y
 ##y = (0.04 * (ox - x)) - y
 #y = (0.00062 * (x - ox)) - y
 
