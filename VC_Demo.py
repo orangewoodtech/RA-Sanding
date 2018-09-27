@@ -162,7 +162,7 @@ _thread.start_new_thread( print_time, ("stepper-3", 0.2, s3,abs(step3),dir3,td3)
 
 time.sleep(10)
 
-for a in range(3):
+for a in range(4):
     def func2():
         ox = [40,45,50,55]
         for x in ox:
@@ -336,7 +336,7 @@ for a in range(3):
     time.sleep(5)
 
     step_count = 300
-    delay = 0.01
+    delay = 0.005
 
     for x in range(step_count):
         GPIO.output(STEP, GPIO.HIGH)
@@ -422,8 +422,8 @@ _thread.start_new_thread( print_time, ("stepper-2", 0.2, s2,abs(step2),dir2,td2)
 _thread.start_new_thread( print_time, ("stepper-3", 0.2, s3,abs(step3),dir3,td3))
 time.sleep(0.2)
 
-step_count = 900
-delay = 0.01
+step_count = 1200
+delay = 0.005
 GPIO.output(DIR, CCW)
 for x in range(step_count):
     GPIO.output(STEP, GPIO.HIGH)
