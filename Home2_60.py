@@ -2,9 +2,24 @@ import math
 import evdev
 import _thread
 import time
+import RPi.GPIO as GPIO
+from time import sleep
 
 from Stepper import stepper
 
+######
+DIR = 19   # Direction GPIO Pin
+STEP = 26  # Step GPIO Pin
+CW = 1     # Clockwise Rotation
+CCW = 0    # Counterclockwise Rotation
+SPR = 1600   # Steps per Revolution (360 / 7.5)
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(DIR, GPIO.OUT)
+GPIO.setup(STEP, GPIO.OUT)
+GPIO.output(DIR, CW)
+
+######
 def print_time(threadName, delay, s, steps, dir, speed):
    count = 1
    while count >=1:
@@ -318,3 +333,16 @@ def func3():
         time.sleep(0.2)
 
 func3()
+
+time.sleep(15)
+
+step_count = 400
+delay = 0.02
+
+for x in range(step_count):
+    GPIO.output(STEP, GPIO.HIGH)
+    sleep(delay)
+    GPIO.output(STEP, GPIO.LOW)
+    sleep(delay)
+    
+    
