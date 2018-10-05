@@ -19,7 +19,7 @@ GPIO.setup(DIR, GPIO.OUT)
 GPIO.setup(STEP, GPIO.OUT)
 GPIO.output(DIR, CW)
 
-height = -0.45
+height = 10
 
 
 ######
@@ -167,10 +167,21 @@ _thread.start_new_thread( print_time, ("stepper-3", 0.2, s3,abs(step3),dir3,td3)
 
 time.sleep(10)
 
+step_count = 100
+delay = 0.005
+
+for x in range(step_count):
+    GPIO.output(STEP, GPIO.HIGH)
+    sleep(delay)
+    GPIO.output(STEP, GPIO.LOW)
+    sleep(delay)
+
+time.sleep(2)
+
 for a in range(4):
     def func2():
-        ox = [34,36,38,40,42,44,46,48,50,52,54,56,58]
-        
+        #ox = [34,36,38,40,42,44,46,48,50,52,54,56,58]
+        ox = [34,37,40,43,46,49,52,55,58,61]
         for x in ox:
             ##ox[5] = {40 45 50 55 60}
             
@@ -184,7 +195,7 @@ for a in range(4):
             print(" oldtheta1:" + str(oldtheta1)+" oldtheta2:"+ str(oldtheta2)+ " oldtheta3:"+ str(oldtheta3))
             ppr=1600  # Pulse Per Revolution
 
-            nx = x+2 ##{45,50,55,60,65}
+            nx = x+3 ##{45,50,55,60,65}
             ny = height
             nz = 0
             #ny = (0.04 * (nx - x)) - ny
@@ -255,9 +266,20 @@ for a in range(4):
     func2()
 
     time.sleep(5)
+    
+    step_count = 200
+    delay = 0.005
 
+    for x in range(step_count):
+        GPIO.output(STEP, GPIO.HIGH)
+        sleep(delay)
+        GPIO.output(STEP, GPIO.LOW)
+        sleep(delay)
+    
+    time.sleep(2)
+    
     def func3():
-        ox = [60,58,56,54,52,50,48,46,44,42,40,38,36]
+        ox = [64,61,58,55,52,49,46,43,40,37]
         for x in ox:
             ##ox[5] = {40 45 50 55 60}
             
@@ -271,7 +293,7 @@ for a in range(4):
             print(" oldtheta1:" + str(oldtheta1)+" oldtheta2:"+ str(oldtheta2)+ " oldtheta3:"+ str(oldtheta3))
             ppr=1600  # Pulse Per Revolution
 
-            nx = x-2 ##{45,50,55,60,65}
+            nx = x-3 ##{45,50,55,60,65}
             ny = height
             nz = 0
             #ny = (0.04 * (nx - x)) - ny
@@ -342,7 +364,7 @@ for a in range(4):
 
     time.sleep(5)
 
-    step_count = 300
+    step_count = 200
     delay = 0.005
 
     for x in range(step_count):
@@ -350,6 +372,7 @@ for a in range(4):
         sleep(delay)
         GPIO.output(STEP, GPIO.LOW)
         sleep(delay)
+        
         
 ox = 34
 oy = height
@@ -429,7 +452,7 @@ _thread.start_new_thread( print_time, ("stepper-2", 0.2, s2,abs(step2),dir2,td2)
 _thread.start_new_thread( print_time, ("stepper-3", 0.2, s3,abs(step3),dir3,td3))
 time.sleep(0.2)
 
-step_count = 1200
+step_count = 1700
 delay = 0.005
 GPIO.output(DIR, CCW)
 for x in range(step_count):
@@ -440,5 +463,6 @@ for x in range(step_count):
 
 
     
+
 
 

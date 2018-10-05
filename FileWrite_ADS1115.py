@@ -49,7 +49,15 @@ while True:
         # ADC (ADS1015 = 12-bit, ADS1115 = 16-bit).
     # Print the ADC values.
     print('| {0:>6} | {1:>6} | {2:>6} | {3:>6} |'.format(*values))
+    
+    f= open("PV94.txt","w+")
+    f.write('| {0:>6} | {1:>6} | {2:>6} | {3:>6} |'.format(*values))
+    
     #print(values[0]/100)
     # Pause for half a second.
     time.sleep(2)
+
+
+f.close()
+
 

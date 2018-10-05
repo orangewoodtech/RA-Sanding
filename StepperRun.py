@@ -12,7 +12,7 @@ GPIO.setup(DIR, GPIO.OUT)
 GPIO.setup(STEP, GPIO.OUT)
 GPIO.output(DIR, CW)
 
-step_count = 1000
+step_count = 50
 delay = 0.02
 
 for x in range(step_count):

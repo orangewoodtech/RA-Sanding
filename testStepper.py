@@ -53,7 +53,7 @@ print(str(oldtheta1)+" oldtheta2:"+str(oldtheta2)+ " oldtheta3:"+str(oldtheta3))
 ppr=1600  # Pulse Per Revolution
 
 x = 35 #17.8
-y = 2  #18.4
+y = 10  #18.4
 z = 0
 
                         ##Error compensation for Linear Motion.
