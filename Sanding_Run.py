@@ -19,6 +19,8 @@ GPIO.setup(DIR, GPIO.OUT)
 GPIO.setup(STEP, GPIO.OUT)
 GPIO.output(DIR, CW)
 
+height = 2
+
 ######
 def print_time(threadName, delay, s, steps, dir, speed):
    count = 1
@@ -59,7 +61,7 @@ print(str(oldtheta1)+" oldtheta2:"+str(oldtheta2)+ " oldtheta3:"+str(oldtheta3))
 ppr=1600  # Pulse Per Revolution
 
 x = 40
-y = 0.1
+y = height
 z = 0
 
                         ##Error compensation for Linear Motion.
@@ -170,7 +172,7 @@ for a in range(4):
         for x in ox:
             ##ox[5] = {40 45 50 55 60}
             
-            oy = 0.1
+            oy = height
             oz = 0
             
             oldtheta2=-math.degrees(math.acos((x*x+oy*oy-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
@@ -181,7 +183,7 @@ for a in range(4):
             ppr=1600  # Pulse Per Revolution
 
             nx = x+5 ##{45,50,55,60,65}
-            ny = 0.1
+            ny = height
             nz = 0
             #ny = (0.04 * (nx - x)) - ny
             
@@ -257,7 +259,7 @@ for a in range(4):
         for x in ox:
             ##ox[5] = {40 45 50 55 60}
             
-            oy = 0.1
+            oy = height
             oz = 0
             
             oldtheta2=-math.degrees(math.acos((x*x+oy*oy-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
@@ -268,7 +270,7 @@ for a in range(4):
             ppr=1600  # Pulse Per Revolution
 
             nx = x-5 ##{45,50,55,60,65}
-            ny = 0.1
+            ny = height
             nz = 0
             #ny = (0.04 * (nx - x)) - ny
             
@@ -347,7 +349,7 @@ for a in range(4):
         sleep(delay)
         
 ox = 40
-oy = 0.1
+oy = height
 oz = 0
             
 oldtheta2=-math.degrees(math.acos((ox*ox+oy*oy-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
@@ -435,3 +437,4 @@ for x in range(step_count):
 
 
     
+

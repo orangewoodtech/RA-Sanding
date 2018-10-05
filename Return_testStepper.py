@@ -18,7 +18,7 @@ def print_time(threadName, delay, s, steps, dir, speed):
 
 
 ################ Angle Check
-      
+##      
 ##arduinoSerialData = serial.Serial('/dev/ttyACM1',9600)
 ###if(arduinoSerialData.inWaiting()>0):
 ##myData = arduinoSerialData.readline()
@@ -41,8 +41,8 @@ htheta2=-math.degrees(math.acos((hx*hx+hy*hy-(l1*l1)-(l2*l2))/ (2*l1*l2)))
 htheta1=math.degrees(math.atan(hy/hx) - math.atan((l2*math.sin(htheta2*math.pi/180))/(l1 + l2*math.cos(htheta2*math.pi/180))))
 htheta3=math.degrees(math.acos(hz/(l1*math.cos(htheta1*math.pi/180) + l2*math.cos((htheta2 + htheta1)*math.pi/180))))
 
-ox = 17.8
-oy = 18.4
+ox = 35
+oy = 2
 oz = 0
 
 #######Inverse Kinematics Equation for obtaining th joint angles -
@@ -52,8 +52,8 @@ oldtheta3=math.degrees(math.acos(oz/(l1*math.cos(oldtheta1*math.pi/180) + l2*mat
 print(str(oldtheta1)+" oldtheta2:"+str(oldtheta2)+ " oldtheta3:"+str(oldtheta3))
 ppr=1600  # Pulse Per Revolution
 
-x = 35 #17.8
-y = 2  #18.4
+x = 17.8
+y = 18.4
 z = 0
 
                         ##Error compensation for Linear Motion.
@@ -156,28 +156,9 @@ _thread.start_new_thread( print_time, ("stepper-1", 0.2, s1,abs(step1),dir1,td1)
 _thread.start_new_thread( print_time, ("stepper-2", 0.2, s2,abs(step2),dir2,td2))
 _thread.start_new_thread( print_time, ("stepper-3", 0.2, s3,abs(step3),dir3,td3))
 
-time.sleep(10)
-
-print("Opening port")
-##
-##try:
-##  arduinoSerialData = serial.Serial('/dev/ttyACM1',9600)
-##  print("Port is open")
-##
-##except serial.SerialException:
-##  serial.Serial('/dev/ttyACM1',9600).close()
-##  print("Port is closed")
-##  arduinoSerialData = serial.Serial('/dev/ttyACM1',9600)
-##  print("Port is open again")
-##
-##print("Ready to use")
-##
-##arduinoSerialData = serial.Serial('/dev/ttyACM1',9600)
-##myData = arduinoSerialData.readline()
-##
-##if myData.decode('utf-8') == "Initialize MPU6050":
-##    print("MPU")
-
+time.sleep(2)
 arduinoSerialData = serial.Serial('/dev/ttyACM1',9600)
+#if(arduinoSerialData.inWaiting()>0):
 myData = arduinoSerialData.readline()
 print(myData.decode('utf-8'))
+

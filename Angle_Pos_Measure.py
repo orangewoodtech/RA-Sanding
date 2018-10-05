@@ -19,6 +19,9 @@ GPIO.setup(DIR, GPIO.OUT)
 GPIO.setup(STEP, GPIO.OUT)
 GPIO.output(DIR, CW)
 
+height = -0.5
+
+
 ######
 def print_time(threadName, delay, s, steps, dir, speed):
    count = 1
@@ -59,7 +62,7 @@ print(str(oldtheta1)+" oldtheta2:"+str(oldtheta2)+ " oldtheta3:"+str(oldtheta3))
 ppr=1600  # Pulse Per Revolution
 
 x = 40
-y = 0.1
+y = height
 z = 0
 
                         ##Error compensation for Linear Motion.
@@ -162,15 +165,16 @@ _thread.start_new_thread( print_time, ("stepper-2", 0.2, s2,abs(step2),dir2,td2)
 _thread.start_new_thread( print_time, ("stepper-3", 0.2, s3,abs(step3),dir3,td3)) 
 
 
-time.sleep(10)
+time.sleep(15)
 
 for a in range(4):
     def func2():
         ox = [40,45,50,55]
+        
         for x in ox:
             ##ox[5] = {40 45 50 55 60}
             
-            oy = 0.1
+            oy = height
             oz = 0
             
             oldtheta2=-math.degrees(math.acos((x*x+oy*oy-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
@@ -181,7 +185,7 @@ for a in range(4):
             ppr=1600  # Pulse Per Revolution
 
             nx = x+5 ##{45,50,55,60,65}
-            ny = 0.1
+            ny = height
             nz = 0
             #ny = (0.04 * (nx - x)) - ny
             
@@ -245,19 +249,19 @@ for a in range(4):
             _thread.start_new_thread( print_time, ("stepper-2", 0.2, s2,abs(step2),dir2,td2))
             _thread.start_new_thread( print_time, ("stepper-3", 0.2, s3,abs(step3),dir3,td3))
             time.sleep(0.2)
-            
+            oy= oy + 0.75
             
             
     func2()
 
-    time.sleep(5)
+    time.sleep(10)
 
     def func3():
         ox = [60,55,50,45]
         for x in ox:
             ##ox[5] = {40 45 50 55 60}
             
-            oy = 0.1
+            oy = height
             oz = 0
             
             oldtheta2=-math.degrees(math.acos((x*x+oy*oy-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
@@ -268,7 +272,7 @@ for a in range(4):
             ppr=1600  # Pulse Per Revolution
 
             nx = x-5 ##{45,50,55,60,65}
-            ny = 0.1
+            ny = height
             nz = 0
             #ny = (0.04 * (nx - x)) - ny
             
@@ -332,10 +336,11 @@ for a in range(4):
             _thread.start_new_thread( print_time, ("stepper-2", 0.2, s2,abs(step2),dir2,td2))
             _thread.start_new_thread( print_time, ("stepper-3", 0.2, s3,abs(step3),dir3,td3))
             time.sleep(0.2)
+            oy= oy - 0.75
 
     func3()
 
-    time.sleep(5)
+    time.sleep(10)
 
     step_count = 300
     delay = 0.005
@@ -347,7 +352,7 @@ for a in range(4):
         sleep(delay)
         
 ox = 40
-oy = 0.1
+oy = height
 oz = 0
             
 oldtheta2=-math.degrees(math.acos((ox*ox+oy*oy-(l1*l1)-(l2*l2))/ (2*l1*l2)))  
@@ -435,3 +440,4 @@ for x in range(step_count):
 
 
     
+
